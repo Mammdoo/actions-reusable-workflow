@@ -1,0 +1,49 @@
+name: Docker | Image | Baking
+
+on:
+  workflow_call:
+
+jobs:
+  Baking:
+    runs-on: ubuntu-latest
+    steps:
+      -
+        name: Docker | setup-qemu
+        uses: docker/setup-qemu-action@v2
+      -
+        name: Docker | setup-buildx
+        uses: docker/setup-buildx-action@v2
+      -
+        name: Docker | login | aliyun
+        uses: docker/login-action@v2
+        with:
+          registry: registry.cn-shanghai.aliyuncs.com
+          username: ${{ secrets.REGISTRY_ALI_USERNAME }}
+          password: ${{ secrets.REGISTRY_ALI_PASSWORD }}
+      -
+        name: Docker | login | dockerhub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.REGISTRY_MAIN_USERNAME }}
+          password: ${{ secrets.REGISTRY_MAIN_PASSWORD }}
+        if: ${{ github.ref_type == 'tag' }}
+      -
+        name: Docker | Baking | aliyun
+        uses: docker/build-push-action@v3
+        with:
+          push: true
+          tags: |
+            registry.cn-shanghai.aliyuncs.com/${{ github.repository }}:${{ github.sha }}
+            registry.cn-shanghai.aliyuncs.com/${{ github.repository }}:develop
+        if: ${{ github.ref_type == 'branch' }}
+      -
+        name: Docker | Baking | dockerhub
+        uses: docker/build-push-action@v3
+        with:
+          push: true
+          tags: | 
+          registry.cn-shanghai.aliyuncs.com/${{ github.repository }}:${{ github.ref_name }}
+          registry.cn-shanghai.aliyuncs.com/${{ github.repository }}:latest
+          ${{ github.repository }}:${{ github.ref_name }}
+          ${{ github.repository }}:latest
+        if: ${{ github.ref_type == 'tag' }}
