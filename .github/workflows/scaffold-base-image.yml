@@ -42,8 +42,8 @@ jobs:
         with:
           push: true
           tags: | 
-          registry.cn-shanghai.aliyuncs.com/${{ github.repository }}:${{ github.ref_name }}
-          registry.cn-shanghai.aliyuncs.com/${{ github.repository }}:latest
-          ${{ github.repository }}:${{ github.ref_name }}
-          ${{ github.repository }}:latest
+            registry.cn-shanghai.aliyuncs.com/${{ github.repository }}:${{ github.ref_name }}
+            registry.cn-shanghai.aliyuncs.com/${{ github.repository }}:latest
+            ${{ github.repository }}:${{ github.ref_name }}
+            ${{ github.repository }}:latest
         if: ${{ github.ref_type == 'tag' }}
