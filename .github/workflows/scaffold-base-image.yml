@@ -33,8 +33,8 @@ jobs:
         with:
           push: true
           tags: |
-            registry.cn-shanghai.aliyuncs.com/${{ github.repository }}:${{ github.sha }}
-            registry.cn-shanghai.aliyuncs.com/${{ github.repository }}:develop
+            registry.cn-shanghai.aliyuncs.com/mammdoo/${{ github.event.repository.name }}:${{ github.sha }}
+            registry.cn-shanghai.aliyuncs.com/mammdoo/${{ github.event.repository.name }}:develop
         if: ${{ github.ref_type == 'branch' }}
       -
         name: Docker | Baking | dockerhub
@@ -42,8 +42,8 @@ jobs:
         with:
           push: true
           tags: | 
-            registry.cn-shanghai.aliyuncs.com/${{ github.repository }}:${{ github.ref_name }}
-            registry.cn-shanghai.aliyuncs.com/${{ github.repository }}:latest
-            ${{ github.repository }}:${{ github.ref_name }}
-            ${{ github.repository }}:latest
+            registry.cn-shanghai.aliyuncs.com/mammdoo/${{ github.event.repository.name }}:${{ github.ref_name }}
+            registry.cn-shanghai.aliyuncs.com/mammdoo/${{ github.event.repository.name }}:latest
+            mammdoo/${{ github.event.repository.name }}:${{ github.ref_name }}
+            mammdoo/${{ github.event.repository.name }}:latest
         if: ${{ github.ref_type == 'tag' }}
