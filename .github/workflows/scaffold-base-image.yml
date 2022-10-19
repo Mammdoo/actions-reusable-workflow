@@ -28,7 +28,7 @@ jobs:
           password: ${{ secrets.REGISTRY_MAIN_PASSWORD }}
         if: ${{ github.ref_type == 'tag' }}
       -
-        name: Docker | Baking | aliyun
+        name: Docker | Baking | branch
         uses: docker/build-push-action@v3
         with:
           push: true
@@ -37,7 +37,7 @@ jobs:
             registry.cn-shanghai.aliyuncs.com/mammdoo/${{ github.event.repository.name }}:develop
         if: ${{ github.ref_type == 'branch' }}
       -
-        name: Docker | Baking | dockerhub
+        name: Docker | Baking | tag
         uses: docker/build-push-action@v3
         with:
           push: true
