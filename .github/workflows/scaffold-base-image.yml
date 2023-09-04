@@ -38,7 +38,7 @@ jobs:
         if: ${{ github.ref_type == 'branch' }}
       -
         name: Docker | Baking | tag
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v4
         with:
           push: true
           tags: | 
@@ -46,4 +46,6 @@ jobs:
             registry.cn-shanghai.aliyuncs.com/mammdoo/${{ github.event.repository.name }}:latest
             mammdoo/${{ github.event.repository.name }}:${{ github.ref_name }}
             mammdoo/${{ github.event.repository.name }}:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
         if: ${{ github.ref_type == 'tag' }}
