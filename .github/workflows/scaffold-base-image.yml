@@ -44,7 +44,6 @@ jobs:
           platforms: |
             linux/amd64
             linux/arm64
-            linux/arm/v7
           tags: |
             registry.cn-shanghai.aliyuncs.com/mammdoo/${{ github.event.repository.name }}:${{ github.ref_name }}
             registry.cn-shanghai.aliyuncs.com/mammdoo/${{ github.event.repository.name }}:latest
