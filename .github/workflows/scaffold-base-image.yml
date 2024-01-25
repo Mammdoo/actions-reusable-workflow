@@ -41,9 +41,6 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           push: true
-          platforms: |
-            linux/amd64
-            linux/arm64/v8
           tags: |
             registry.cn-shanghai.aliyuncs.com/mammdoo/${{ github.event.repository.name }}:${{ github.ref_name }}
             registry.cn-shanghai.aliyuncs.com/mammdoo/${{ github.event.repository.name }}:latest
